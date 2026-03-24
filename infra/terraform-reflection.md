@@ -1,0 +1,8 @@
+39.1. Explain why the ‘import’ blocks were important in this lab. Explain how they work, and how the process would be different if you were starting a project from scratch.
+
+    Using Terraform import blocks are important in this context because we just want Terraform to import our IDs using refrences. Resource blocks use these refrences to fetch IDs of different infrastructures(subnets, VPCs, security groups, etc.). Without imports, Terraform would simply ignore the existing resources, potentially making dupes. Or even destroy and recreate them if using a config that overlaps. If starting from scratch, you would just write the Terraform config, and run terraform apply. It will create everything and track the state from the start.
+
+
+39.2. Consider how Terraform tracks the infrastructure state, and explain why you did NOT use Terraform to manage the secrets stored in the Parameter Store service. Under what circumstances WOULD it be reasonable to use Terraform to manage these secrets? 
+
+    We do not use Terraform to manage secrets because it stores the state of every resources it manages in plaintext JSON. Any secret managed through Terraform (RDS passwords, api keys, etc.) gets written exactly as is into that file. The circumstance where it would be reasonable to do this is to write the secret seperately, either by using the AWS console, or using a tool like Vault or AWS Secrets Manager, then using the placeholder value in the resource block instead.
