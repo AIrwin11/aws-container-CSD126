@@ -13,6 +13,22 @@ resource "aws_instance" "xpix_app_server" {
   }
 
   user_data = file("${path.module}/user_data.sh")
+
+  root_block_device {
+    volume_size = 8
+    volume_type = "gp3"
+    iops = 3000
+    throughput = 125
+    delete_on_termination = true
+  }
+  credit_specification {
+    cpu_credits = "unlimited"
+  }
+  metadata_options {
+    http_endpoint = "enabled"
+    http_tokens = "required"
+    http_put_response_hop_limit = 2
+  }
 }
 
 import {
