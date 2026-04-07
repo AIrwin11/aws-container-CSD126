@@ -8,4 +8,4 @@ by the timeout.
 
 3.2 The two GSIs that were created are useful in the sense that it allows you to run queries on attributes that aren't the primary key, which is great for quick lookups. <br>
 The GSI for the user-photos-index allows for DynamoBD to maintain a seperate copy of the data grouped by user_id. This allows instant queries, regardless of the quantity of <br> photos in the table. Otherwise it would be very inefficient and costly to query the entire database for pictures.
-The GSI for feed-index works in a similar manner, but with the feed. It keeps a seperate copy grouped by feed_key and it allows the behaviour of being able see photos that aren't private, while the ones that are private aren't in the index at all, meaning they won't show up on the feed. 
+The GSI for feed-index works in a similar manner, but with the feed. It keeps a seperate copy of data grouped by feed_key and it allows the behaviour of being able see photos that aren't private, while the ones that are private aren't in the index at all, meaning they won't show up on the feed. 
